@@ -18,40 +18,37 @@ app.get('/app', (req, res) => {
 })
 
 // If wrong port is found, 404 not found
-app.get('*', (req, res) => {
-    res.status(404).send('404 NOT FOUND');
-  });
+
 
 // Run rps 4 queries
 app.get('/app/rps', (req, res) => {
     res.status(200).send(rps());
+});
+// rpsls 4 queries
+
+app.get('/app/rpsls/', (req, res) => {
+    res.status(200).json(rpsls());
 });
 
 app.get('/app/rps/play', (req, res) => {
     res.status(200).send(rps(req.query.shot));
 })
 
-app.post('/app/rps/play', (req, res) => {
-    res.status(200).send(rps(req.body.shot));
-})
-
-app.get('/app/rps/play/:shot', (req, res) => {
-    res.status(200).send(rps(req.params.shot));
-})
-
-
-// Run rpsls 4 queries
-
-app.get('/app/rpsls/', (req, res) => {
-    res.status(200).json(rpsls());
-});
-
 app.get('/app/rpsls/play', (req, res) => {
     res.status(200).send(rpsls(req.query.shot));
 })
 
+
+app.post('/app/rps/play', (req, res) => {
+    res.status(200).send(rps(req.body.shot));
+})
+
 app.post('/app/rpsls/play', (req, res) => {
     res.status(200).send(rpsls(req.body.shot));
+})
+
+app.get('/app/rps/play/:shot', (req, res) => {
+    res.status(200).send(rps(req.params.shot));
 })
 
 app.get('/app/rpsls/play/:shot', (req, res) => {
@@ -59,6 +56,10 @@ app.get('/app/rpsls/play/:shot', (req, res) => {
 })
 
 // Start the server
+
+app.get('*', (req, res) => {
+    res.status(404).send('404 NOT FOUND');
+  });
 
 app.listen(port, () => {
     console.log(`Listening on port ${port}`)
